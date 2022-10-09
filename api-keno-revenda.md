@@ -503,7 +503,7 @@ This notification will be sent whenever all the draws which a ticket from an ord
 This notification will be sent after the payment of a prize is made or after a prize payment is withhold for further review before release.
 
 **Provided Variables**
-- type : "ticket"
+- type : "order"
 - action : "awarded"
 - status : "awarded" for prizes already paid or "manual-award" for prizes which will need a manual review.
 - order_id : The Order ID
