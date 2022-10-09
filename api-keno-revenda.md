@@ -3,6 +3,19 @@
 
 This API allow you to connect with Keno Revenda system.
 
+The test environment URL is:
+
+- https://revenda.kenominas.com.br/beta/ - Dashboard
+
+- https://revenda.kenominas.com.br/beta/api - API Endpoint
+
+The production environment URL is:
+
+- https://revenda.kenominas.com.br/ - Dashboard
+
+- https://revenda.kenominas.com.br/api - API Endpoint
+
+
 *** IMPORTANT NOTICE ***
 This API is still under development and currently are in beta testing. Production environments are not ready.
 
@@ -369,11 +382,32 @@ The notification will be sent as body POST to your URL. It will always be a JSON
 - type : Usually the notification category based in the object referenced
 - action : The action which happened with the object
 
-#### A ticket order is paid
-This notification will be sent whenever a ticket order (created using the endpoint /ticket/order) is paid by the customer.
+#### A ticket draws are settled
+This notification will be sent whenever a ticket have it's draws settled
 
 **Provided Variables**
 - type : "ticket"
+- action : "finished-draws"
+- status : "unawarded" for not winning tickets or "prized" for winning tickets.
+- award : Gross amount of the award
+- ticket : The ticket serial number
+
+**Sample Notification**
+```json
+{
+    "type": "ticket",
+    "action": "finished-draws",
+    "status": "prized",
+    "award": 4,
+    "ticket": "000820193600007864320585689757"
+}
+```
+
+#### A order is paid
+This notification will be sent whenever a ticket order (created using the endpoint /ticket/order) is paid by the customer.
+
+**Provided Variables**
+- type : "order"
 - action : "generated"
 - order_id : The Order ID which got paid
 - ticket : The ticket object generated after the payment
@@ -381,7 +415,7 @@ This notification will be sent whenever a ticket order (created using the endpoi
 **Sample Notification**
 ```json
 {
-    "type": "ticket",
+    "type": "order",
     "action": "generated",
     "order_id": 1,
     "ticket": {
@@ -420,7 +454,7 @@ This notification will be sent whenever a ticket order (created using the endpoi
 This notification will be sent whenever all the draws which a ticket from an order participates is settled. At this moment we also know if the ticket won a prize or not, and how much.
 
 **Provided Variables**
-- type : "ticket"
+- type : "order"
 - action : "drawn"
 - status : "unawarded" for not winning tickets or "prized" for winning tickets.
 - order_id : The Order ID
@@ -429,7 +463,7 @@ This notification will be sent whenever all the draws which a ticket from an ord
 **Sample Notification**
 ```json
 {
-    "type": "ticket",
+    "type": "order",
     "action": "drawn",
     "status": "unawarded",
     "order_id": 1,
@@ -479,7 +513,7 @@ This notification will be sent after the payment of a prize is made or after a p
 **Sample Notification**
 ```json
 {
-    "type": "ticket",
+    "type": "order",
     "action": "updated",
     "status": "awarded",
     "order_id": 1,
