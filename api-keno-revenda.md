@@ -366,6 +366,37 @@ curl 'https://revenda.kenominas.com.br/beta/api/ticket/new/' \
 }
 ```
 
+### /notifications/pending
+- Available for All
+
+This endpoint will retrieve details about all notifications which are still pending from your account.
+
+**Expected Variables**
+- day : *(optional)* A single day in format YYYY-MM-DD to retrieve notifications from that day alone
+- type : *(optional)* Retrieve only notifications from that type. More information on Notifications section below.
+- page : *(optional)* For paginated results. API will return 100 entries per page in ascending order by date
+
+### /notifications/failed
+- Available for All
+
+This endpoint will retrieve details about all notifications which failed to be submitted from your account.
+
+**Expected Variables**
+- day : *(optional)* A single day in format YYYY-MM-DD to retrieve notifications from that day alone
+- type : *(optional)* Retrieve only notifications from that type. More information on Notifications section below.
+- page : *(optional)* For paginated results. API will return 100 entries per page in ascending order by date
+
+### /notifications/sent
+- Available for All
+
+This endpoint will retrieve details about all notifications which were sent from your account.
+
+**Expected Variables**
+- day : *(optional)* A single day in format YYYY-MM-DD to retrieve notifications from that day alone
+- type : *(optional)* Retrieve only notifications from that type. More information on Notifications section below.
+- page : *(optional)* For paginated results. API will return 100 entries per page in ascending order by date
+
+
 
 ## Webhooks 
 You can setup a public reachable URL on the options for the Webhook functionality. This URL must be secured by a valid SSL. After activating an URL, we'll send every future notification to that URL.
