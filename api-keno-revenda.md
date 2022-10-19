@@ -335,19 +335,21 @@ This endpoint will allow to view all details from a specific order from your acc
 This endpoint will allow you to update the PIX to where a given award should be sent. The pix will be validated and if it matches the customer CPF, we'll automatically send the award to that pix key.
 
 **Expected Variables**
-- order_id : *(required)* Integer value of the Order ID which received an award
+- serial : *(required)* String value of the Ticket Serial which received an award
+- cpf : *(required)* String value representing the ticket owner CPF for further validation.
 - pix_key : *(required)* A string with the PIX Key for search.
 
 **Sample Request**
 ```json
 curl 'https://revenda.kenominas.com.br/beta/api/ticket/pix/' \
-  --data-raw '{"account_id":2,"key":"QcgA2.J8qz2vnzxIIco4U2m8M5z0gNmIbUM","pix_key":"jon.snow@starkbank.com","order_id":10}'
+  --data-raw '{"account_id":2,"key":"QcgA2.J8qz2vnzxIIco4U2m8M5z0gNmIbUM","pix_key":"jon.snow@starkbank.com","cpf":"12345678900","serial":"107374385900125829120780328297"}'
 ```
 
 **Sample Response**
 ```json
 {
   "order_id" : 10,
+  "serial" : "107374385900125829120780328297",
   "pix_key" : "jon.snow@starkbank.com",
   "success" : true
 }
@@ -481,6 +483,23 @@ This notification will be sent whenever a ticket order (created using the endpoi
             "paid": null
         }
     }
+}
+```
+
+#### A order is canceled
+This notification will be sent whenever a ticket order (created using the endpoint /ticket/order) is canceled.
+
+**Provided Variables**
+- type : "order"
+- action : "canceled"
+- order_id : The Order ID which got paid
+
+**Sample Notification**
+```json
+{
+    "type": "order",
+    "action": "canceled",
+    "order_id": 1
 }
 ```
 
