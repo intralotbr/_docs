@@ -265,6 +265,23 @@ curl 'https://revenda.kenominas.com.br/beta/api/ticket/new/' \
 }
 ```
 
+### /ticket/image
+- Available for All
+
+This endpoint will allow viewing the ticket in image format.
+
+**Expected Variables**
+- serial : *(required)* A string containing the ticket serial.
+
+**Sample Request**
+```json
+curl 'https://revenda.kenominas.com.br/beta/api/ticket/new/' \
+  --data-raw '{"account_id":2,"key":"QcgA2.J8qz2vnzxIIco4U2m8M5z0gNmIbUM","serial":"000820193600007864320585689757"}'
+```
+
+**Sample Response**
+Response will be an image in PNG format.
+
 ### /draws
 - Available for All
 
@@ -289,6 +306,54 @@ curl 'https://revenda.kenominas.com.br/beta/api/draws/' \
 ]
 ```
 
+### /pix_info
+- Available for Reseller
+
+This endpoint will retrieve information regarding a pix key. This should only be used by integrations which will generate pre-paid tickets. You should validate the PIX key format at your side prior to requesting this endpoint, checking for invalid Emails, CPF or Phone Numbers. The PIX information is cached by 1 day, regardless of it's validity.
+
+**Expected Variables**
+- pix_key : *(required)* A string with the PIX Key for search.
+
+**Sample Request**
+```json
+curl 'https://revenda.kenominas.com.br/beta/api/pix_info/' \
+  --data-raw '{"account_id":2,"key":"QcgA2.J8qz2vnzxIIco4U2m8M5z0gNmIbUM","key":"jon.snow@starkbank.com"}'
+```
+
+**Sample Response**
+```json
+{
+  "dict_key": {
+    "id": "jon.snow@starkbank.com",
+    "type": "email",
+    "name": "Gus Arabian",
+    "taxId": "123.456.789-10",
+    "ownerType": "individual",
+    "bankName": "COOPERATIVA DE POUPANÇA E CRÉDITO DO VALE DO RIO DOCE LTDA – SICOOB CREDIRIODOCE",
+    "ispb": "25606237",
+    "branchCode": "3896",
+    "accountNumber": "8887687662207545",
+    "accountType": "savings",
+    "accountCreated": {
+      "date": "2022-09-15 20:37:43.265860",
+      "timezone_type": 1,
+      "timezone": "+00:00"
+    },
+    "status": "registered",
+    "owned": {
+      "date": "2022-09-15 20:37:43.265860",
+      "timezone_type": 1,
+      "timezone": "+00:00"
+    },
+    "created": {
+      "date": "2022-09-15 20:37:43.265860",
+      "timezone_type": 1,
+      "timezone": "+00:00"
+    }
+  }
+}
+```
+
 ### /ticket/order
 - Available for Reseller
 
@@ -299,61 +364,102 @@ This endpoint will allow the register of a new pre-paid ticket for customers. Th
 - cpf : *(required)* A string containing customer CPF.
 - cep : *(required)* A string containing customer CEP. It must be between 30000-000 and 39999-999.
 - phone : *(required)* A string containing customer Cell Phone Number.
+- pix : *(required)* A string with the customer PIX Key. If the generated ticket is awarded, the payment will be done through this PIX key. The Pix Key must be associated with the customer CPF informed above. This key should be first validated through the endpoint `/pix_info`
 - numbers : *(required)* A string containing the desired numbers separated by comma, the list must have at least one number and at max 10 numbers, between 1 and 80.
 - multiply : *(required)* An integer with the desired value to multiple the bet. Allowed values: 1, 2, 3, 4, 5, 6, 8, 10, 12, 20
 - draws : *(required)* An integer with the desired value of draws which this bet should participate. Allowed values: 1, 2, 3, 4, 5, 6, 10, 20, 50, 100, 200
 - golden : *(required)* A boolean value indicating if the bet will use Golden Ball/Bull's Eye. Any value besides *true* will not use it.
 - price : *(optional)* An integer value representing the calculated cost of the ticket. If informed, the calculated price must match the real price which will be charged, otherwise the ticket will not be generated.
+- sms : *(optional)* If equal to 1, an SMS will be sent to the user with the ticket and when the ticket is settled.
 
 **Sample Request**
 ```json
 curl 'https://revenda.kenominas.com.br/beta/api/ticket/new/' \
-  --data-raw '{"account_id":2,"key":"TJ22t.KwBjFP0sCHd6rJKOg7d5k5nEOBR7y","name":"Jon Snow","cpf":"123.456.789-10","cep":"33000-000","phone":"31 98203 9008","pix":"jon.snow@starkbank.com","price":24,"numbers":"2,10,34,56","multiply":3,"draws":"2","golden":true}'
+  --data-raw '{
+  "account_id": 2,
+  "key": "Ruaxz.fKZKWatbX93ExsmWlDiSlwcocJoq1",
+  "name": "Jon Snow",
+  "cpf": "12345678910",
+  "cep": "39950000",
+  "phone": "31999999999",
+  "multiply": 1,
+  "numbers": "13,15,24,26,35,46,47,71,72,73",
+  "draws": 1,
+  "golden": 1,
+  "sms": "1"
+}'
 ```
+
+**Response Variables**
+- order : An integer representing the Order ID created.
+- expiration : Timestamp with the time limit to pay the QR Code.
+- qrcode : The Text representation of the QR Code for payment.
+- qrcode_img : A URL where you can get the image representing the above QR Code as image.
+
 **Sample Response**
 ```json
 {
-    "order": 1,
-    "expiration": "2022-09-21T18:15:38+00:00",
-    "qrcode": "00020101021226890014br.gov.bcb.pix2567brcode-h.sandbox.starkinfra.com/v2/56efd1aebea943f48a787a7b98a221645204000053039865802BR5925Intralot Do Brasil Comerc6014Belo Horizonte62070503***6304F067",
-    "qrcode_img": "https://revenda.kenominas.com.br/5029865065545728"
+  "order": 3,
+  "expiration": "2022-11-07T23:08:54+00:00",
+  "qrcode": "00020101021226790014br.gov.bcb.pix2557invoice.starkbank.com/v2/30432bac47b545d68f9bf815c62b939f5204000053039865802BR5925Intralot Do Brasil Comerc6014Belo Horizonte62070503***6304BED6",
+  "qrcode_img": "https://revenda.kenominas.com.br/invoice-qrcode/6424804695474176"
 }
 ```
 
 ### /ticket/order/view
 - Available for Reseller
 
-This endpoint will allow to view all details from a specific order from your account
+This endpoint will allow to check all the details about an order.
 
 **Expected Variables**
-- order_id : *(required)* Integer value of the Order ID
-
-
-### /ticket/pix
-- Available for Reseller
-
-This endpoint will allow you to update the PIX to where a given award should be sent. The pix will be validated and if it matches the customer CPF, we'll automatically send the award to that pix key.
-
-**Expected Variables**
-- serial : *(required)* String value of the Ticket Serial which received an award
-- cpf : *(required)* String value representing the ticket owner CPF for further validation.
-- pix_key : *(required)* A string with the PIX Key for search.
+- order_id : *(required)* The Order ID to look for.
 
 **Sample Request**
 ```json
-curl 'https://revenda.kenominas.com.br/beta/api/ticket/pix/' \
-  --data-raw '{"account_id":2,"key":"QcgA2.J8qz2vnzxIIco4U2m8M5z0gNmIbUM","pix_key":"jon.snow@starkbank.com","cpf":"12345678900","serial":"107374385900125829120780328297"}'
+curl 'https://revenda.kenominas.com.br/beta/api/ticket/new/' \
+  --data-raw '{
+  "account_id": 2,
+  "key": "Ruaxz.fKZKWatbX93ExsmWlDiSlwcocJoq1",
+  "order_id": 3
+}'
 ```
+
+**Response Variables**
+- order : An integer representing the Order ID created.
+- value : The cost of the order
+- date : Timestamp with the time when order was created.
+- serial : The ticket serial number. It will be null until order is paid and ticket is generated.
+- multiply : The multiplier selected
+- numbers : The numbers selected
+- draws : The draws amount selected
+- golden : The golden selection
 
 **Sample Response**
 ```json
 {
-  "order_id" : 10,
-  "serial" : "107374385900125829120780328297",
-  "pix_key" : "jon.snow@starkbank.com",
-  "success" : true
+  "id": 3,
+  "value": 4,
+  "date": "2022-11-07 20:02:54.000000",
+  "status": "canceled",
+  "serial": null,
+  "multiply": 1,
+  "numbers": [
+    13,
+    15,
+    24,
+    26,
+    35,
+    46,
+    47,
+    71,
+    72,
+    73
+  ],
+  "draws": 1,
+  "golden": 1
 }
 ```
+
 ### /ticket/list
 - Available for All
 
@@ -370,6 +476,33 @@ This endpoint will retrieve details about all tickets generated by your account
 -- settled : return all tickets which prizes were paid
 -- unsettled : return all tickets which prizes are still pending payment
 - page : *(optional)* For paginated results. API will return 100 entries per page in ascending order by date
+
+**Sample Request**
+```json
+curl 'https://revenda.kenominas.com.br/beta/api/ticket/new/' \
+  --data-raw '{
+  "account_id": 2,
+  "key": "Ruaxz.fKZKWatbX93ExsmWlDiSlwcocJoq1",
+  "status": "unawarded"
+}'
+```
+
+**Response Variables**
+- Array of:
+-- serial : String with the Serial Number
+-- date : Timestamp with the time when serial was created.
+-- status : The current serial status
+
+**Sample Response**
+```json
+[
+    {
+        "serial": "003348528004194304002342531931",
+        "date": "2022-11-04 18:50:44.000000",
+        "status": "unawarded"
+    }
+]
+```
 
 ### /notifications/pending
 - Available for All
@@ -410,7 +543,10 @@ We expect a header response status 200 to consider the notification as sent. In 
 
 ### Authenticating the Notification
 
-Every notification submission will have a header 'Digital-Signature', this digital signature can be verified using our Public Key found at the /public-key endpoint.
+Every notification submission will have a header 'Digital-Signature', this digital signature can be verified using our Public Key found at the /public-key endpoint. To do so:
+- Read the Digital-Signature header
+- Decode the Digital-Singature at base64
+- Confirm the signature with OpenSSL using the decoded signature with our public key.
 
 ### Notifications
 
@@ -483,23 +619,6 @@ This notification will be sent whenever a ticket order (created using the endpoi
             "paid": null
         }
     }
-}
-```
-
-#### A order is canceled
-This notification will be sent whenever a ticket order (created using the endpoint /ticket/order) is canceled.
-
-**Provided Variables**
-- type : "order"
-- action : "canceled"
-- order_id : The Order ID which got paid
-
-**Sample Notification**
-```json
-{
-    "type": "order",
-    "action": "canceled",
-    "order_id": 1
 }
 ```
 
