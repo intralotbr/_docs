@@ -415,7 +415,7 @@ curl 'https://revenda.kenominas.com.br/beta/api/ticket/new/' \
 ### /ticket/pix
 - Available for Reseller
 
-This endpoint will allow to set the DICT key for a Prized order. After set, the order will enter in a queue for prize payment.
+This endpoint will allow to set the DICT key for a Prized order. After set, the order will enter in a queue for prize payment. If the payment cannot be done for any reason, but most likely due to bank issues reason, order will be marked as "manual-payment" and the ticket will need to pass through a soft manual review for receiving the payment.
 
 **Expected Variables**
 - cpf : *(required)* The user CPF. It must match the CPF which registered the ticket.
