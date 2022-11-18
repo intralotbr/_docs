@@ -315,6 +315,7 @@ This endpoint will allow the register of a new pre-paid ticket for customers. Th
 - name : *(required)* A string containing the full customer name, including first and last name, limited to 255 characters.
 - cpf : *(required)* A string containing customer CPF.
 - cep : *(required)* A string containing customer CEP. It must be between 30000-000 and 39999-999.
+- birthdate : *(required)* A string containing customer Birthdate. It must be 18 years age. Format can be m/d/y or d-m-y
 - phone : *(required)* A string containing customer Cell Phone Number.
 - pix : *(required)* A string with the customer PIX Key. If the generated ticket is awarded, the payment will be done through this PIX key. The Pix Key must be associated with the customer CPF informed above. This key should be first validated through the endpoint `/pix_info`
 - numbers : *(required)* A string containing the desired numbers separated by comma, the list must have at least one number and at max 10 numbers, between 1 and 80.
@@ -333,6 +334,7 @@ curl 'https://revenda.kenominas.com.br/beta/api/ticket/new/' \
   "name": "Jon Snow",
   "cpf": "12345678910",
   "cep": "39950000",
+  "birthdate": "12/20/2020",
   "phone": "31999999999",
   "multiply": 1,
   "numbers": "13,15,24,26,35,46,47,71,72,73",
