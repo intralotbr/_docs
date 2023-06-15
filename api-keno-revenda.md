@@ -16,9 +16,6 @@ The production environment URL is:
 - https://revenda.kenominas.com.br/api - API Endpoint
 
 
-*** IMPORTANT NOTICE ***
-This API is still under development and currently are in beta testing. Production environments are not ready.
-
 
 ## Account Types
 
@@ -229,41 +226,65 @@ This endpoint will allow viewing all details about a ticket belonging to this ac
 
 **Sample Request**
 ```json
-curl 'https://revenda.kenominas.com.br/beta/api/ticket/new/' \
-  --data-raw '{"account_id":2,"key":"QcgA2.J8qz2vnzxIIco4U2m8M5z0gNmIbUM","serial":"000820193600007864320585689757"}'
+curl 'https://revenda.kenominas.com.br/beta/api/ticket/view/' \
+  --data-raw '{"account_id":2,"key":"QcgA2.J8qz2vnzxIIco4U2m8M5z0gNmIbUM","serial":"346508494400000001990073237648"}'
 ```
 **Sample Response**
 ```json
 {
-    "serial": "000820193600007864320585689757",
-    "registeredDate": "20/08/2022 12:39:52",
+  "ticket": {
+    "serial": "346508494400000001990073237648",
+    "registeredDate": "17/05/2023 14:42:35",
     "draws": {
-        "amount": 1,
-        "firstDraw": 1025242,
-        "firstDrawTime": "20/08/2022 12:40:00",
-        "lastDraw": 1025242,
-        "lastDrawTime": "20/08/2022 12:40:00"
+      "amount": 3,
+      "firstDraw": 1101449,
+      "firstDrawTime": "17/05/2023 14:44:00",
+      "lastDraw": 1101451,
+      "lastDrawTime": "17/05/2023 14:52:00"
     },
     "bet": {
-        "numbers": [
-            2,
-            10,
-            34,
-            56
-        ],
-        "multiply": 3,
-        "golden": true
+      "numbers": [
+        31,
+        33,
+        43,
+        48,
+        52,
+        56,
+        59,
+        63,
+        69,
+        72
+      ],
+      "multiply": 1,
+      "golden": false
     },
-    "price": 12,
+    "price": 6,
     "award": {
-        "settled": true,
-        "prize": 0,
-        "tax": 0,
-        "prizeFinal": 0,
-        "paid": null
+      "settled": true,
+      "prize": 2000,
+      "tax": 0,
+      "prizeFinal": 2000,
+      "paid": {
+        "payment_method": "NeoGames Wallet",
+        "payment_id": "KENO_AWARD_PAY_259260"
+      }
     }
+  },
+  "ticket_img": "<div style=\"border: 1px solid #aaa; padding: 30px 10px; background: #fff; text-align: center; font-size: 14px; color: #000; width: 350px; max-width: 100%; margin: 0 auto;\"><img alt=\"Keno Minas\" width=\"170\" height=\"117\" src=\"http://localhost:8000/assets/img/logo.png\" style=\"display: block; margin: 0 auto 10px; width: 126px;\"><div style=\"border-bottom: 1px dashed #000; padding: 5px;\">Primeiro Sorteio: 17/05/2023 14:44:00 17/05/2023 14:52:00<br />Comprovante válido para 3 sorteio (s)<br />Do sorteio 1101449 até 1101451<br />Multiplicador 1</div><div style=\"border-bottom: 1px dashed #000; padding: 5px;\">(10) <span style=\"font-size: 30px; font-weight: 700;\">31 33 43 48 52 56 59 63 69 72</span><br /><span style=\"font-size: 20px; font-weight: 700; letter-spacing: 3px;\">Bola de Ouro : Não</span></div><div style=\"border-bottom: 1px dashed #000; padding: 5px; font-size: 0; font-weight: 700;\"><span style=\"display: inline-block; width: 45%; font-size: 30px; text-align: left;\">Total</span><span style=\"display: inline-block; width: 45%; font-size: 30px; text-align: right;\">R$6,00</span><br /></div><div style=\"padding: 5px;\">Agente: Keno Minas Revenda<br /><strong>17/05/2023 14:42:35</strong><br /><div style=\"height: 30px; margin: 10px 0;\"><div style=\"font-size:0;position:relative;width:100%;height:100%\">\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:0%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:0.5%;height:100%;position:absolute;left:1.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1.5%;height:100%;position:absolute;left:3%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:0.5%;height:100%;position:absolute;left:5.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:0.5%;height:100%;position:absolute;left:7.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:8.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:0.5%;height:100%;position:absolute;left:11%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:0.5%;height:100%;position:absolute;left:12.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:13.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:0.5%;height:100%;position:absolute;left:16.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:18.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:0.5%;height:100%;position:absolute;left:20.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:22%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:0.5%;height:100%;position:absolute;left:23.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1.5%;height:100%;position:absolute;left:25.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:0.5%;height:100%;position:absolute;left:27.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:29.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1.5%;height:100%;position:absolute;left:31%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:33%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:34.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:36.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:38.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:40%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:42%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:44%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:45.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:47.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:49.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:51.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:53%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:0.5%;height:100%;position:absolute;left:55%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1.5%;height:100%;position:absolute;left:56%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:2%;height:100%;position:absolute;left:58%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:60.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:62%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:64%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:0.5%;height:100%;position:absolute;left:66%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:68.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:0.5%;height:100%;position:absolute;left:70%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1.5%;height:100%;position:absolute;left:71.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:73.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1.5%;height:100%;position:absolute;left:75%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:77%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:0.5%;height:100%;position:absolute;left:79%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:0.5%;height:100%;position:absolute;left:80%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1.5%;height:100%;position:absolute;left:82.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1.5%;height:100%;position:absolute;left:84.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:86.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:88%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:90.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:92%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:93.5%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1.5%;height:100%;position:absolute;left:96%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:0.5%;height:100%;position:absolute;left:98%;top:0\">&nbsp;</div>\n<div style=\"background-color:#000;width:1%;height:100%;position:absolute;left:99%;top:0\">&nbsp;</div>\n</div>\n</div><strong>34650 84944 00000 00199 00732 37648</strong><br /><em>9562ed9a-8a1a-4b01-8936-465120b3669d</em><br /></div></div>",
+  "ticket_payment": "<div style=\"border: 1px solid #aaa; padding: 30px 10px; background: #fff; text-align: center; font-size: 14px; color: #000; width: 350px; max-width: 100%; margin: 0 auto;\"><img alt=\"Keno Minas\" width=\"170\" height=\"117\" src=\"http://localhost:8000/assets/img/logo.png\" style=\"display: block; margin: 0 auto 10px; width: 126px;\"><div style=\"border-bottom: 1px dashed #000; padding: 5px;\"><strong>Pagamento do Prêmio</strong><br />Agente: Keno Minas Revenda<br /></div><div style=\"border-bottom: 1px dashed #000; padding: 5px; font-size: 0;\"><span style=\"display: inline-block; width: 50%; font-size: 14px; text-align: left;\">Jogo</span><span style=\"display: inline-block; width: 45%; font-size: 14px; text-align: left;\">: Keno Minas (1117)</span><br /><span style=\"display: inline-block; width: 50%; font-size: 14px; text-align: left;\">Comprovante</span><span style=\"display: inline-block; width: 45%; font-size: 14px; text-align: left;\">: 4</span><br /><span style=\"display: inline-block; width: 50%; font-size: 14px; text-align: left; vertical-align: top;\">Sorteio(s)</span><span style=\"display: inline-block; width: 45%; font-size: 14px; text-align: left;\">: DO 1101449 ATÉ 1101451</span><br /><span style=\"display: inline-block; width: 50%; font-size: 14px; text-align: left;\">Sorteio(s) rest.</span><span style=\"display: inline-block; width: 45%; font-size: 14px; text-align: left;\">: 0</span><span style=\"display: inline-block; width: 50%; font-size: 14px; text-align: left;\">Multiplicador</span><span style=\"display: inline-block; width: 45%; font-size: 14px; text-align: left;\">: 1</span><span style=\"display: inline-block; width: 50%; font-size: 14px; text-align: left;\">Bola de Ouro</span><span style=\"display: inline-block; width: 45%; font-size: 14px; text-align: left;\">: Não</span></div><div style=\"padding: 5px; font-size: 0;\"><span style=\"display: inline-block; width: 100%; font-size: 14px; text-align: center; font-weight: 700;\">Sorteio Vencedor: 1101450</span><br /><span style=\"display: inline-block; width: 25%; font-size: 14px; text-align: center;\">Acertos</span><span style=\"display: inline-block; width: 25%; font-size: 14px; text-align: center;\">Prêmio</span><span style=\"display: inline-block; width: 25%; font-size: 14px; text-align: center;\">Multipl.</span><span style=\"display: inline-block; width: 25%; font-size: 14px; text-align: center;\">Total</span>><br /><span style=\"display: inline-block; width: 25%; font-size: 14px; text-align: center;\">8</span><span style=\"display: inline-block; width: 25%; font-size: 14px; text-align: center;\">2.000,00</span><span style=\"display: inline-block; width: 25%; font-size: 14px; text-align: center;\">1</span><span style=\"display: inline-block; width: 25%; font-size: 14px; text-align: center;\">2.000,00</span>><br /><br /><span style=\"margin-top: 20px; display: inline-block; width: 50%; font-size: 20px; text-align: left; font-weight: 700;\">Total de Prêmios</span><span style=\"display: inline-block; width: 45%; font-size: 20px; text-align: left; font-weight: 700;\">: R$2.000,00</span><br /><span style=\"display: inline-block; width: 50%; font-size: 20px; text-align: left; font-weight: 700;\">IR</span><span style=\"display: inline-block; width: 45%; font-size: 20px; text-align: left; font-weight: 700;\">: R$0,00</span><br /><span style=\"display: inline-block; width: 50%; font-size: 20px; text-align: left; font-weight: 700;\">Valor líquido</span><span style=\"display: inline-block; width: 45%; font-size: 20px; text-align: left; font-weight: 700;\">: R$2.000,00</span><br /><span style=\"display: block; width: 100%; font-size: 16px; text-align: center; font-weight: 700; margin: 20px 0;\">Prêmio Pago.<br />Meio do Pagamento: NeoGames Wallet<br />ID do Pagamento: KENO_AWARD_PAY_259260</span></span><span style=\"padding-top: 10px; display: inline-block; width: 90%; font-size: 14px; text-align: left;\">BCN: 346508494400000001990073237648</span></div></div>"
 }
 ```
+
+### /ticket/pay/award
+- Available for Distributor
+
+This endpoint allow the distributor to inform Intralot that a specific ticket award was paid.
+
+**Expected Variables**
+- serial : *(required)* A string containing the ticket serial.
+- method : *(required)* The payment method used, usually the bank or payment processor name
+- identifier : *(required)* A unique ID which identifies the payment at the processor system
+- value : *(required)* The award value which was paid. It must be equal to the award value.
 
 ### /ticket/image
 - Available for All
@@ -275,7 +296,7 @@ This endpoint will allow viewing the ticket in image format.
 
 **Sample Request**
 ```json
-curl 'https://revenda.kenominas.com.br/beta/api/ticket/new/' \
+curl 'https://revenda.kenominas.com.br/beta/api/ticket/image/' \
   --data-raw '{"account_id":2,"key":"QcgA2.J8qz2vnzxIIco4U2m8M5z0gNmIbUM","serial":"000820193600007864320585689757"}'
 ```
 
@@ -285,10 +306,10 @@ Response will be an image in PNG format.
 ### /draws
 - Available for All
 
-This endpoint will retrieve details about a specific draw or the last 10 draws.
+This endpoint will retrieve details about draws results.
 
 **Expected Variables**
-- draw : *(optional)* An integer, if informed will show the result for that draw
+- draw : *(optional)* A single integer representing a Draw number. If not sent will return the latest 10.
 
 **Sample Request**
 ```json
@@ -306,6 +327,14 @@ curl 'https://revenda.kenominas.com.br/beta/api/draws/' \
 ]
 ```
 
+### /ticket/draws
+- Available for All
+
+This endpoint will retrieve details about draws results for a specific ticket
+
+**Expected Variables**
+- serial : *(required)* A string containing the ticket serial.
+
 ### /ticket/order
 - Available for Reseller
 
@@ -317,7 +346,6 @@ This endpoint will allow the register of a new pre-paid ticket for customers. Th
 - cep : *(required)* A string containing customer CEP. It must be between 30000-000 and 39999-999.
 - birthdate : *(required)* A string containing customer Birthdate. It must be 18 years age. Format can be m/d/y or d-m-y
 - phone : *(required)* A string containing customer Cell Phone Number.
-- pix : *(required)* A string with the customer PIX Key. If the generated ticket is awarded, the payment will be done through this PIX key. The Pix Key must be associated with the customer CPF informed above. This key should be first validated through the endpoint `/pix_info`
 - numbers : *(required)* A string containing the desired numbers separated by comma, the list must have at least one number and at max 10 numbers, between 1 and 80.
 - multiply : *(required)* An integer with the desired value to multiple the bet. Allowed values: 1, 2, 3, 4, 5, 6, 8, 10, 12, 20
 - draws : *(required)* An integer with the desired value of draws which this bet should participate. Allowed values: 1, 2, 3, 4, 5, 6, 10, 20, 50, 100, 200
@@ -327,7 +355,7 @@ This endpoint will allow the register of a new pre-paid ticket for customers. Th
 
 **Sample Request**
 ```json
-curl 'https://revenda.kenominas.com.br/beta/api/ticket/new/' \
+curl 'https://revenda.kenominas.com.br/beta/api/ticket/order/' \
   --data-raw '{
   "account_id": 2,
   "key": "Ruaxz.fKZKWatbX93ExsmWlDiSlwcocJoq1",
@@ -370,7 +398,7 @@ This endpoint will allow to check all the details about an order.
 
 **Sample Request**
 ```json
-curl 'https://revenda.kenominas.com.br/beta/api/ticket/new/' \
+curl 'https://revenda.kenominas.com.br/beta/api/ticket/order/view/' \
   --data-raw '{
   "account_id": 2,
   "key": "Ruaxz.fKZKWatbX93ExsmWlDiSlwcocJoq1",
@@ -426,7 +454,7 @@ This endpoint will allow to set the DICT key for a Prized order. After set, the 
 
 **Sample Request**
 ```json
-curl 'https://revenda.kenominas.com.br/beta/api/ticket/new/' \
+curl 'https://revenda.kenominas.com.br/beta/api/ticket/pix/' \
   --data-raw '{
   "account_id": 2,
   "key": "Ruaxz.fKZKWatbX93ExsmWlDiSlwcocJoq1",
@@ -472,7 +500,7 @@ This endpoint will retrieve details about all tickets generated by your account
 
 **Sample Request**
 ```json
-curl 'https://revenda.kenominas.com.br/beta/api/ticket/new/' \
+curl 'https://revenda.kenominas.com.br/beta/api/ticket/list/' \
   --data-raw '{
   "account_id": 2,
   "key": "Ruaxz.fKZKWatbX93ExsmWlDiSlwcocJoq1",
